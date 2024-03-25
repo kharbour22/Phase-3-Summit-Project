@@ -16,7 +16,7 @@ class Review:
     
     @rating.setter
     def rating(self, rating_parameter):
-        if(isinstance(rating_parameter, int)) and (1 <= rating_parameter <= 10):
+        if isinstance(rating_parameter, int) and 1 <= rating_parameter <= 10:
             self._rating = rating_parameter
         else:
             raise ValueError("Rating must be an integer between 1 and 10!")
@@ -38,7 +38,7 @@ class Review:
     
     @mountain_id.setter
     def mountain_id(self, mountain_id_parameter):
-        if(isinstance(mountain_id_parameter, int)):
+        if isinstance(mountain_id_parameter, int):
             self._mountain_id = mountain_id_parameter
         else:
             raise ValueError("Mountain ID must be an integer!")

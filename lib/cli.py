@@ -25,8 +25,8 @@ def main():
 
 
 def menu():
-    print("\nHere's the main menu!")
-    print("h: Interact with Mountain data")
+    print("\nMAIN MENU!\n")
+    print("m: Interact with Mountain data")
     print("r: Interact with Review data")
     print("q: Quit the program\n")
 
