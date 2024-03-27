@@ -16,6 +16,7 @@ def interact_with_mountain_data():
     while(True):
         mountain_options_menu()
         user_input = input("Select an option from the menu: ")
+        print("_______________________________________")
         if(user_input == 'c'):
             create_mountain()
             break
@@ -31,24 +32,29 @@ def interact_with_mountain_data():
         elif(user_input == 'mr'):
             retrieve_mountain_reviews()
             break
+        elif(user_input == 'q'): 
+            return
         else:
             print("Invalid input! Please try again!\n")
 
 def mountain_options_menu():
-    print("\nHere's the Mountain options menu!")
+    print("_______________________________________")
+    print("\nHere's the Mountain options menu!\n")
     print("c: Create a new mountain")
     print("r: Retrieve mountain data")
     print("u: Update a mountain")
     print("d: Delete a mountain")
-    print("mr: Retrieve a mountain's reviews\n")
+    print("mr: Retrieve a mountain's reviews")
+    print("q: Return to Main Menu\n")
 
 def retrieve_mountains():
+    print("_______________________________________")
     options_for_retrieve_mountains()
     user_input = input("Select an option from the menu: ")
 
     while(True):
         if(user_input == 'a'):
-            print("\nHere are all of the mountains:")
+            print("\nHere are all of the mountains:\n")
             for mountain in Mountain.all:
                 print(mountain)
             # User can press 'return' to continue...
@@ -74,11 +80,13 @@ def retrieve_mountains():
             print("Invalid input! Please try again!\n")
 
 def options_for_retrieve_mountains():
+    print("_______________________________________")
     print("\nWould you like to retrieve all mountains or just one?")
     print("a: Retrieve all mountains")
     print("1: Retrieve one mountain\n")
 
 def create_mountain():
+    print("_______________________________________")
     name = input("Enter a name for the new mountain: ")
     elevation = int(input("Enter the elevation for the mountain in feet: "))
     location = input("Enter the location for the mountain: ")
@@ -89,6 +97,7 @@ def create_mountain():
 
 
 def update_mountain():
+    print("_______________________________________")
     while True:
         try:
             user_input = input("\nEnter a number for the mountain id to update: ")
@@ -122,6 +131,7 @@ def update_mountain():
             print("Invalid input! Please try again!")
 
 def delete_mountain():
+    print("_______________________________________")
     while(True):
         try:
             user_input = input("\nEnter a number for the mountain id to delete: ")
@@ -137,6 +147,7 @@ def delete_mountain():
             print("Invalid input! Please try again!")
     
 def retrieve_mountain_reviews():
+    print("_______________________________________")
     while(True):
         try:
             user_input = input("\nEnter a number for the mountain id to get reviews for: ")
@@ -154,6 +165,7 @@ def retrieve_mountain_reviews():
 
 
 def interact_with_review_data():
+    print("_______________________________________")
     while(True):
         review_options_menu()
         user_input = input("Select an option from the menu: ")
@@ -172,24 +184,29 @@ def interact_with_review_data():
         elif(user_input == 'mr'):
             retrieve_mountain_reviews()
             break
+        elif(user_input == 'q'):
+            return
         else:
             print("Invalid input! Please try again!\n")
 
 def review_options_menu():
-    print("\nHere's the Review options menu!")
+    print("_______________________________________")
+    print("\nHere's the Review options menu!\n")
     print("c: Create a new review")
     print("r: Retrieve review data")
     print("u: Update a review")
     print("d: Delete a review")
-    print("mr: Retrieve a mountain's reviews\n")
+    print("mr: Retrieve a mountain's reviews")
+    print("q: Return to Main Menu\n")
 
 def retrieve_reviews():
+    print("_______________________________________")
     options_for_retrieve_reviews()
     user_input = input("Select an option from the menu: ")
 
     while(True):
         if(user_input == 'a'):
-            print("\nHere are all of the reviews:")
+            print("\nHere are all of the reviews:\n")
             for review in Review.all:
                 print(review)
             # User can press 'Enter' to continue...
@@ -215,11 +232,13 @@ def retrieve_reviews():
             print("Invalid input! Please try again!\n")
 
 def options_for_retrieve_reviews():
+    print("_______________________________________")
     print("\nWould you like to retrieve all reviews or just one?")
     print("a: Retrieve all reviews")
     print("1: Retrieve one review\n")
 
 def create_review():
+    print("_______________________________________")
     while True:
         mountain_id_str = input("Enter the mountain id for the new review: ")
         try:
@@ -244,6 +263,7 @@ def create_review():
     user_input = input("\nPress 'Enter' to continue...")
 
 def update_reviews():
+    print("_______________________________________")
     while(True):
         try:
             user_input = input("\nEnter a number for the review id to update: ")
@@ -263,6 +283,7 @@ def update_reviews():
             print("Invalid input! Please try again!")
 
 def delete_review():
+    print("_______________________________________")
     while(True):
         try:
             user_input = input("\nEnter a number for the review id to delete: ")
@@ -278,6 +299,7 @@ def delete_review():
             print("Invalid input! Please try again!")
     
 def retrieve_mountain_reviews():
+    print("_______________________________________")
     while(True):
         try:
             user_input = input("\nEnter a number for the mountain id to get reviews for: ")
