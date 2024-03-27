@@ -80,21 +80,38 @@ def options_for_retrieve_mountains():
 
 def create_mountain():
     name = input("Enter a name for the new mountain: ")
-    new_mountain = Mountain.create(name)
+    elevation = int(input("Enter the elevation for the mountain in feet: "))
+    location = input("Enter the location for the mountain: ")
+    new_mountain = Mountain.create(name, elevation, location)
     print("Here's the information for your new mountain:")
     print(new_mountain)
     user_input = input("\nPress 'Enter' to continue...")
 
+
 def update_mountain():
-    while(True):
+    while True:
         try:
             user_input = input("\nEnter a number for the mountain id to update: ")
             user_input = int(user_input)
             mountain = Mountain.find_by_id(user_input)
-            if(mountain):
+            if mountain:
                 new_mountain_name = input("Enter a new name for the mountain: ")
+                new_elevation = int(input("Enter a new elevation for the mountain in feet: "))
+                new_location = input("Enter a new location for the mountain: ")
+                
+                # Validate elevation input
+                try:
+                    new_elevation = int(new_elevation)
+                except ValueError:
+                    print("Invalid elevation input! Please enter a number.")
+                    continue  # Restart the loop to prompt for input again
+
+                # Update mountain attributes
                 mountain.name = new_mountain_name
+                mountain.elevation = new_elevation
+                mountain.location = new_location
                 mountain.update()
+                
                 print("The mountain has been updated:")
                 print(mountain)
                 user_input = input("\nPress 'Enter' to continue...")
@@ -204,6 +221,14 @@ def options_for_retrieve_reviews():
 
 def create_review():
     while True:
+        mountain_id_str = input("Enter the mountain id for the new review: ")
+        try:
+            mountain_id = int(mountain_id_str)
+            break
+        except ValueError:
+            print("Mountain ID must be an integer. Please try again.")
+    text= input("Enter the review text here: ")
+    while True:
         rating_str = input("Rate the difficulty (1-10): ")
         try:
             rating = int(rating_str)
@@ -213,14 +238,6 @@ def create_review():
                 print("Rating must be between 1 and 10. Please try again.")
         except ValueError:
             print("Invalid input. Please enter a number between 1 and 10.")
-    text= input("Enter the review text here: ")
-    while True:
-        mountain_id_str = input("Enter the mountain id for the new review: ")
-        try:
-            mountain_id = int(mountain_id_str)
-            break
-        except ValueError:
-            print("Mountain ID must be an integer. Please try again.")
     new_review = Review.create(rating, text, mountain_id)
     print("Here's the information for your new review:")
     print(new_review)

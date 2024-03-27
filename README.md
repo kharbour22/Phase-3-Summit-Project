@@ -18,7 +18,7 @@ This project is a simple Python application for managing mountain and review dat
 
 Clone the repository:
 
--git clone https://github.com/kharbour22/python-p3-v2-final-project-templategit
+-git clone https://github.com/kharbour22/Phase-3-Summit-Project
 
 Navigate to the project directory:
 

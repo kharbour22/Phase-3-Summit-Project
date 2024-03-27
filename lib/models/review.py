@@ -44,7 +44,7 @@ class Review:
             raise ValueError("Mountain ID must be an integer!")
 
     def __repr__(self):
-        return f"<Review {self.id}: Rating = {self.rating}, Text = {self.text}, Mountain ID = {self.mountain_id}>"
+        return f"<Review {self.id}: Mountain ID = {self.mountain_id}, Text = {self.text}, Rating = {self.rating}>"
 
     # add new ORM methods after existing methods
 
@@ -130,10 +130,10 @@ class Review:
         # Update the table row corresponding to the current Review instance.
         sql = """
             UPDATE reviews
-            SET rating = ?, text = ?, mountain_id = ?
+            SET mountain_id = ?, text = ?, rating = ?,
             WHERE id = ?
         """
-        CURSOR.execute(sql, (self.rating, self.text, self.mountain_id, self.id))
+        CURSOR.execute(sql, (self.mountain_id, self.text, self.rating, self.id))
         CONN.commit()
 
     def delete(self):
