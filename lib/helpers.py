@@ -243,10 +243,15 @@ def create_review():
         mountain_id_str = input("Enter the mountain id for the new review: ")
         try:
             mountain_id = int(mountain_id_str)
-            break
+            mountain = Mountain.find_by_id(mountain_id)
+            if mountain:
+                break
+            else:
+                print("This id does not exist. Please try again.")
         except ValueError:
             print("Mountain ID must be an integer. Please try again.")
-    text= input("Enter the review text here: ")
+
+    text = input("Enter the review text here: ")
     while True:
         rating_str = input("Rate the difficulty (1-10): ")
         try:
@@ -257,6 +262,7 @@ def create_review():
                 print("Rating must be between 1 and 10. Please try again.")
         except ValueError:
             print("Invalid input. Please enter a number between 1 and 10.")
+    
     new_review = Review.create(rating, text, mountain_id)
     print("Here's the information for your new review:")
     print(new_review)
