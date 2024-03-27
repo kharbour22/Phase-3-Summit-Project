@@ -27,10 +27,10 @@ class Review:
     
     @text.setter
     def text(self, text_parameter):
-        if(isinstance(text_parameter, str)) and (3 <= len(text_parameter) <= 40):
+        if(isinstance(text_parameter, str)) and (3 <= len(text_parameter) <= 80):
             self._text = text_parameter
         else:
-            raise ValueError("Text must be a string between 3 and 40 characters long!")
+            raise ValueError("Text must be a string between 3 and 80 characters long!")
 
     @property
     def mountain_id(self):
