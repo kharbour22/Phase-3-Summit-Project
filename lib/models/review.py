@@ -130,7 +130,7 @@ class Review:
         # Update the table row corresponding to the current Review instance.
         sql = """
             UPDATE reviews
-            SET mountain_id = ?, text = ?, rating = ?,
+            SET mountain_id = ?, text = ?, rating = ?
             WHERE id = ?
         """
         CURSOR.execute(sql, (self.mountain_id, self.text, self.rating, self.id))

@@ -57,7 +57,7 @@ def retrieve_mountains():
             print("\nHere are all of the mountains:\n")
             for mountain in Mountain.all:
                 print(mountain)
-            # User can press 'return' to continue...
+            # User can press 'Enter' to continue...
             user_input = input("\nPress 'Enter' to continue...")
             break
         elif(user_input == '1'):
@@ -264,23 +264,25 @@ def create_review():
 
 def update_reviews():
     print("_______________________________________")
-    while(True):
+    while True:
         try:
             user_input = input("\nEnter a number for the review id to update: ")
             user_input = int(user_input)
             review = Review.find_by_id(user_input)
-            if(review):
+            if review:
                 new_review_text = input("Enter new text for the review: ")
+                new_rating = input("Enter new rating for the review: ")  # Prompt for new rating
                 review.text = new_review_text
+                review.rating = int(new_rating)  # Convert new_rating to integer
                 review.update()
                 print("The review has been updated:")
                 print(review)
-                user_input = input("\nPress 'Enter' to continue...")
+                input("\nPress 'Enter' to continue...")
             else:
                 print("\nReview Not Found!")
             break
-        except:
-            print("Invalid input! Please try again!")
+        except ValueError:
+            print("Invalid input! Please enter a valid integer for the review ID.")
 
 def delete_review():
     print("_______________________________________")
