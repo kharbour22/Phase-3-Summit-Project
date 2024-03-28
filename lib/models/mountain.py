@@ -44,7 +44,7 @@ class Mountain:
             raise ValueError("Location must be a string!")
 
     def __repr__(self):
-        return f"<Mountain {self.id}: Name = {self.name}, Elevation = {self.elevation}, Location = {self.location}>"
+        return f"<Mountain {self.id}: Name = {self.name}, Elevation = {self.elevation}, Location = {self.location}>\n"
     
     # add new ORM methods after existing methods
 

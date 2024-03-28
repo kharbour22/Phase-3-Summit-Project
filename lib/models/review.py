@@ -44,7 +44,7 @@ class Review:
             raise ValueError("Mountain ID must be an integer!")
 
     def __repr__(self):
-        return f"<Review {self.id}: Mountain ID = {self.mountain_id}, Text = {self.text}, Rating = {self.rating}>"
+        return f"<Review {self.id}: Mountain ID #{self.mountain_id}, {self.text}, Rating = {self.rating}>\n"
 
     # add new ORM methods after existing methods
 

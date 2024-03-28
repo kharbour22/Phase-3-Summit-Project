@@ -50,16 +50,16 @@ def mountain_options_menu():
 def retrieve_mountains():
     print("_______________________________________")
     options_for_retrieve_mountains()
-    user_input = input("Select an option from the menu: ")
-
     while True:
+        user_input = input("Select an option from the menu: ")
+
         if user_input == 'a':
             print("\nHere are all of the mountains:\n")
             for mountain in Mountain.all:
                 print(mountain)
             # User can press 'Enter' to continue...
             input("\nPress 'Enter' to continue...")
-            break
+            break  # Exit the loop and return to the main menu
         elif user_input == '1':
             while True:
                 try:
@@ -67,17 +67,18 @@ def retrieve_mountains():
                     mountain_id = int(user_input)
                     mountain = Mountain.find_by_id(mountain_id)
                     if mountain:
-                        print("\nHere is the mountain you requested:")
+                        print("\nHere is the mountain you requested:\n")
                         print(Mountain.find_by_id(mountain_id))
+                        input("\nPress 'Enter' to continue...")
+                        return 
                     else:
                         print("\nMountain Not Found!")
                     input("\nPress 'Enter' to continue...")
-                    break
+                    break 
                 except ValueError:
                     print("Invalid input! Please enter a valid mountain ID.")
         else:
             print("Invalid input! Please try again!\n")
-            user_input = input("Select an option from the menu: ")
 
 def options_for_retrieve_mountains():
     print("_______________________________________")
@@ -128,7 +129,7 @@ def update_mountain():
                 mountain.location = new_location
                 mountain.update()
                 
-                print("The mountain has been updated:")
+                print("\nThe mountain has been updated:\n")
                 print(mountain)
                 input("\nPress 'Enter' to continue...")
                 break
@@ -146,7 +147,7 @@ def delete_mountain():
             mountain = Mountain.find_by_id(user_input)
             if(mountain):
                 mountain.delete()
-                print("Moutain successfully deleted!")
+                print("\nMoutain successfully deleted!")
                 input("\nPress 'Enter' to continue...")
             else:
                 print("\nMountain Not Found!")
@@ -163,7 +164,7 @@ def retrieve_mountain_reviews():
             user_input = int(user_input)
             mountain = Mountain.find_by_id(user_input)
             if(mountain):
-                print(f"\nHere are the reviews for Mountain # {mountain.id}:")
+                print(f"\nHere are the reviews for Mountain # {mountain.id}\n:")
                 print(mountain.reviews())
             else:
                 print("\nMountain Not Found!")
@@ -281,7 +282,7 @@ def create_review():
 
     try:
         new_review = Review.create(rating, text, mountain_id)
-        print("Here's the information for your new review:")
+        print("\nHere's the information for your new review:\n")
         print(new_review)
         user_input = input("\nPress 'Enter' to continue...")
     except ValueError as e:
@@ -307,7 +308,7 @@ def update_reviews():
                     review.rating = int(new_rating)
                     review.mountain_id = int(new_mountain_id)
                     review.update()
-                    print("The review has been updated:")
+                    print("\nThe review has been updated:\n")
                     print(review)
                     input("\nPress 'Enter' to continue...")
                     break
@@ -348,7 +349,7 @@ def retrieve_mountain_reviews():
             user_input = int(user_input)
             mountain = Mountain.find_by_id(user_input)
             if(mountain):
-                print(f"\nHere are the reviews for Mountain # {mountain.id}:")
+                print(f"\nHere are the reviews for {mountain.name}:\n")
                 print(mountain.reviews())
             else:
                 print("\nMountain Not Found!")
