@@ -22,12 +22,16 @@ Clone the repository:
 
 Navigate to the project directory:
 
--cd mountain-reviews-project
+-cd Phase-3-Summit-Project
+
 
 Install dependencies:
 
 pipenv install
+
 pipenv shell
+
+Enter python lib/cli.py in your terminal and check it out!
 
 ---
 
@@ -44,4 +48,6 @@ main.py: Main script to run the application and interact with user inputs.
 lib/debug.py: Debug script for debugging database interactions using ipdb.
 
 The main entry point of the project is the main.py script. This script provides a command-line interface (CLI) for users to interact with the mountain and review data. Upon running the script, users are presented with a main menu where they can choose to interact with mountain data, review data, or quit the program. The script utilizes helper functions defined in other files to perform CRUD (Create, Read, Update, Delete) operations on mountains and reviews, as well as retrieve reviews associated with specific mountains.
+
+
 
