@@ -19,7 +19,7 @@ class Mountain:
         if(isinstance(name_parameter, str)) and (3 <= len(name_parameter) <= 25):
             self._name = name_parameter
         else:
-            raise ValueError("Name must be a string between 3 and 25 characters long!")
+            raise ValueError("Name must be between 3 and 25 characters!")
 
     @property
     def elevation(self):

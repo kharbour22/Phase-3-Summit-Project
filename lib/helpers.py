@@ -52,32 +52,32 @@ def retrieve_mountains():
     options_for_retrieve_mountains()
     user_input = input("Select an option from the menu: ")
 
-    while(True):
-        if(user_input == 'a'):
+    while True:
+        if user_input == 'a':
             print("\nHere are all of the mountains:\n")
             for mountain in Mountain.all:
                 print(mountain)
             # User can press 'Enter' to continue...
-            user_input = input("\nPress 'Enter' to continue...")
+            input("\nPress 'Enter' to continue...")
             break
-        elif(user_input == '1'):
-            while(True):
+        elif user_input == '1':
+            while True:
                 try:
                     user_input = input("\nEnter a number for the mountain id to search: ")
-                    user_input = int(user_input)
-                    mountain = Mountain.find_by_id(user_input)
-                    if(mountain):
+                    mountain_id = int(user_input)
+                    mountain = Mountain.find_by_id(mountain_id)
+                    if mountain:
                         print("\nHere is the mountain you requested:")
-                        print(Mountain.find_by_id(user_input))
+                        print(Mountain.find_by_id(mountain_id))
                     else:
                         print("\nMountain Not Found!")
-                    user_input = input("\nPress 'Enter' to continue...")
+                    input("\nPress 'Enter' to continue...")
                     break
-                except:
-                    print("Invalid input! Please try again!")
-            break
+                except ValueError:
+                    print("Invalid input! Please enter a valid mountain ID.")
         else:
             print("Invalid input! Please try again!\n")
+            user_input = input("Select an option from the menu: ")
 
 def options_for_retrieve_mountains():
     print("_______________________________________")
@@ -87,13 +87,20 @@ def options_for_retrieve_mountains():
 
 def create_mountain():
     print("_______________________________________")
-    name = input("Enter a name for the new mountain: ")
-    elevation = int(input("Enter the elevation for the mountain in feet: "))
-    location = input("Enter the location for the mountain: ")
-    new_mountain = Mountain.create(name, elevation, location)
-    print("Here's the information for your new mountain:")
-    print(new_mountain)
-    user_input = input("\nPress 'Enter' to continue...")
+    while True:
+        try:
+            name = input("Enter a name for the new mountain: ")
+            elevation = int(input("Enter the elevation for the mountain in feet: "))
+            location = input("Enter the location for the mountain: ")
+            
+            new_mountain = Mountain.create(name, elevation, location)
+            print("Here's the information for your new mountain:")
+            print(new_mountain)
+            user_input = input("\nPress 'Enter' to continue...")
+            break
+        except ValueError as e:
+            print("Error:", e)
+            print("Please try again!\n")
 
 
 def update_mountain():
@@ -105,7 +112,7 @@ def update_mountain():
             mountain = Mountain.find_by_id(user_input)
             if mountain:
                 new_mountain_name = input("Enter a new name for the mountain: ")
-                new_elevation = int(input("Enter a new elevation for the mountain in feet: "))
+                new_elevation = input("Enter a new elevation for the mountain in feet: ")
                 new_location = input("Enter a new location for the mountain: ")
                 
                 # Validate elevation input
@@ -123,12 +130,12 @@ def update_mountain():
                 
                 print("The mountain has been updated:")
                 print(mountain)
-                user_input = input("\nPress 'Enter' to continue...")
+                input("\nPress 'Enter' to continue...")
+                break
             else:
                 print("\nMountain Not Found!")
-            break
-        except:
-            print("Invalid input! Please try again!")
+        except ValueError:
+            print("Invalid input! Please enter a valid mountain ID.")
 
 def delete_mountain():
     print("_______________________________________")
@@ -140,8 +147,10 @@ def delete_mountain():
             if(mountain):
                 mountain.delete()
                 print("Moutain successfully deleted!")
+                input("\nPress 'Enter' to continue...")
             else:
                 print("\nMountain Not Found!")
+                input("\nPress 'Enter' to continue...")
             break
         except:
             print("Invalid input! Please try again!")
@@ -162,7 +171,7 @@ def retrieve_mountain_reviews():
             break
         except:
             print("Invalid input! Please try again!")
-
+           
 
 def interact_with_review_data():
     print("_______________________________________")
@@ -204,32 +213,33 @@ def retrieve_reviews():
     options_for_retrieve_reviews()
     user_input = input("Select an option from the menu: ")
 
-    while(True):
-        if(user_input == 'a'):
+    while True:
+        if user_input == 'a':
             print("\nHere are all of the reviews:\n")
             for review in Review.all:
                 print(review)
             # User can press 'Enter' to continue...
-            user_input = input("\nPress 'Enter' to continue...")
+            input("\nPress 'Enter' to continue...")
             break
-        elif(user_input == '1'):
-            while(True):
+        elif user_input == '1':
+            while True:
                 try:
                     user_input = input("\nEnter a number for the review id to search: ")
-                    user_input = int(user_input)
-                    review = Review.find_by_id(user_input)
-                    if(review):
-                        print("\nHere is the review you requested:")
-                        print(Review.find_by_id(user_input))
+                    review_id = int(user_input)
+                    review = Review.find_by_id(review_id)
+                    if review:
+                        print("\nHere is the review you requested:\n")
+                        print(Review.find_by_id(review_id))
+                        input("\nPress 'Enter' to continue...")
+                        return  # Exit the function after successfully retrieving one review
                     else:
                         print("\nReview Not Found!")
-                    user_input = input("\nPress 'Enter' to continue...")
                     break
-                except:
-                    print("Invalid input! Please try again!")
-            break
+                except ValueError:
+                    print("Invalid input! Please enter a valid review ID.")
         else:
             print("Invalid input! Please try again!\n")
+            user_input = input("Select an option from the menu: ")
 
 def options_for_retrieve_reviews():
     print("_______________________________________")
@@ -251,7 +261,13 @@ def create_review():
         except ValueError:
             print("Mountain ID must be an integer. Please try again.")
 
-    text = input("Enter the review text here: ")
+    while True:
+        text = input("Enter the review text here: ")
+        if 3 <= len(text) <= 80:
+            break
+        else:
+            print("Text must be between 3 and 80 characters long. Please try again.")
+
     while True:
         rating_str = input("Rate the difficulty (1-10): ")
         try:
@@ -262,11 +278,15 @@ def create_review():
                 print("Rating must be between 1 and 10. Please try again.")
         except ValueError:
             print("Invalid input. Please enter a number between 1 and 10.")
-    
-    new_review = Review.create(rating, text, mountain_id)
-    print("Here's the information for your new review:")
-    print(new_review)
-    user_input = input("\nPress 'Enter' to continue...")
+
+    try:
+        new_review = Review.create(rating, text, mountain_id)
+        print("Here's the information for your new review:")
+        print(new_review)
+        user_input = input("\nPress 'Enter' to continue...")
+    except ValueError as e:
+        print("Error:", e)
+        print("Review creation failed. Please try again.")
 
 def update_reviews():
     print("_______________________________________")
@@ -277,18 +297,29 @@ def update_reviews():
             review = Review.find_by_id(user_input)
             if review:
                 new_review_text = input("Enter new text for the review: ")
-                new_rating = input("Enter new rating for the review: ")  # Prompt for new rating
-                review.text = new_review_text
-                review.rating = int(new_rating)  # Convert new_rating to integer
-                review.update()
-                print("The review has been updated:")
-                print(review)
-                input("\nPress 'Enter' to continue...")
+                new_rating = input("Enter new rating for the review: ")  
+                new_mountain_id = input("Enter new mountain id for the review: ")
+
+                # Check if the entered mountain_id exists
+                mountain = Mountain.find_by_id(int(new_mountain_id))
+                if mountain:
+                    review.text = new_review_text
+                    review.rating = int(new_rating)
+                    review.mountain_id = int(new_mountain_id)
+                    review.update()
+                    print("The review has been updated:")
+                    print(review)
+                    input("\nPress 'Enter' to continue...")
+                    break
+                else:
+                    print("Mountain with the provided ID does not exist.")
             else:
                 print("\nReview Not Found!")
-            break
+                input("\nPress 'Enter' to continue...")
+                break
+            
         except ValueError:
-            print("Invalid input! Please enter a valid integer for the review ID.")
+            print("Invalid input! Please enter valid integers for the review ID, rating, and mountain ID.")
 
 def delete_review():
     print("_______________________________________")
@@ -299,9 +330,12 @@ def delete_review():
             review = Review.find_by_id(user_input)
             if(review):
                 review.delete()
-                print("Review successfully deleted!")
+                print("\nReview successfully deleted!")
+                input("\nPress 'Enter' to continue...")
+                break
             else:
                 print("\nReview Not Found!")
+                input("\nPress 'Enter' to continue...")
             break
         except:
             print("Invalid input! Please try again!")
